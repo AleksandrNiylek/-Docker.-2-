@@ -116,6 +116,80 @@ Docker Compose — это инструментальное средство, в�
 * скриншот авторизации в админке Zabbix.
 
 #### Текст конфига:
+version: '3'
+services:
+  podluzhniy-netology-db:
+    image: postgres:latest
+    container_name: podluzhniy-netology-db
+    ports:
+      - 5432:5432
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data/pgdata
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: podluzhniy_db
+      PGDATA: /var/lib/postgresql/data/pgdata
+    networks:
+      podluzhniy-my-netology:
+        ipv4_address: 172.22.0.2
+    restart: always
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: podluzhniy-netology-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: podluzhniy@ilove-netology.com
+      PGADMIN_DEFAULT_PASSWORD: 123
+    ports:
+      - "61231:80"
+    networks:
+      podluzhniy-my-netology:
+        ipv4_address: 172.22.0.3
+    restart: always
+
+  zabbix-server:
+    image: zabbix/zabbix-server-pgsql
+    links:
+      - podluzhniy-netology-db
+    container_name: podluzhniy-zabbix-netology
+    environment:
+      DB_SERVER_HOST: '172.20.0.2'
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+    ports:
+      - "10051:10051"
+    networks:
+      podluzhniy-my-netology:
+        ipv4_address: 172.22.0.4
+    restart: always
+
+  zabbix_wgui:
+    image: zabbix/zabbix-web-apache-pgsql
+    links:
+      - podluzhniy-netology-db
+      - zabbix-server
+    container_name: podluzhniy-netolog-zabbix-frontend
+    environment:
+      DB_SERVER_HOST: '172.20.0.2'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 123
+      ZBX_SERVER_HOST: "zabbix_wqui"
+      PHP_TZ: "Europe/Moscow"
+    ports:
+      - "80:8080"
+      - "443:8443"
+    networks:
+      podluzhniy-my-netology:
+        ipv4_address: 172.22.0.5
+    restart: always
+
+
+networks:
+  podluzhniy-my-netology:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 172.22.0.0/24
 
 
 
