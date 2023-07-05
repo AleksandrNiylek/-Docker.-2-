@@ -69,6 +69,7 @@ Docker Compose — это инструментальное средство, в�
 
 #### Скриншот:
 ![4](https://github.com/AleksandrNiylek/-Docker.-2-/assets/136619576/e8c36c71-e197-4d78-8c80-872fa0d470f3)
+![4 1](https://github.com/AleksandrNiylek/-Docker.-2-/assets/136619576/555df2c9-2d1b-4655-ad12-97909abe4c78)
 
 
 
@@ -83,7 +84,8 @@ Docker Compose — это инструментальное средство, в�
 3. Назначьте для данного контейнера статический IP из подсети 172.22.0.0/24.
 
 #### Скриншот:
-![5](https://github.com/AleksandrNiylek/-Docker.-2-/assets/136619576/4734900b-f43d-4899-956e-16d51f2135de)
+![5](https://github.com/AleksandrNiylek/-Docker.-2-/assets/136619576/76f95394-099d-47d9-9cab-6bd0434c8d24)
+
 
 
 
@@ -98,7 +100,8 @@ Docker Compose — это инструментальное средство, в�
 3. Назначьте для данного контейнера статический IP из подсети 172.22.0.0/24.
 
 #### Скриншот:
-![6](https://github.com/AleksandrNiylek/-Docker.-2-/assets/136619576/53cdb6de-2044-4a88-853d-c4b3f175f7dd)
+![6](https://github.com/AleksandrNiylek/-Docker.-2-/assets/136619576/5111d493-111d-4e6d-a5e5-84f149b87a9f)
+
 
 
 ---
@@ -116,6 +119,7 @@ Docker Compose — это инструментальное средство, в�
 * скриншот авторизации в админке Zabbix.
 
 #### Текст конфига:
+
 version: '3'
 services:
   podluzhniy-netology-db:
@@ -153,7 +157,7 @@ services:
       - podluzhniy-netology-db
     container_name: podluzhniy-zabbix-netology
     environment:
-      DB_SERVER_HOST: '172.20.0.2'
+      DB_SERVER_HOST: '172.22.0.2'
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
     ports:
@@ -170,14 +174,14 @@ services:
       - zabbix-server
     container_name: podluzhniy-netolog-zabbix-frontend
     environment:
-      DB_SERVER_HOST: '172.20.0.2'
+      DB_SERVER_HOST: '172.22.0.2'
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 123
       ZBX_SERVER_HOST: "zabbix_wqui"
       PHP_TZ: "Europe/Moscow"
     ports:
-      - "80:8080"
-      - "443:8443"
+      - "8080:8080"
+      - "8443:8443"
     networks:
       podluzhniy-my-netology:
         ipv4_address: 172.22.0.5
@@ -191,7 +195,10 @@ networks:
       config:
       - subnet: 172.22.0.0/24
 
+#### Скриншоты:
+![7](https://github.com/AleksandrNiylek/-Docker.-2-/assets/136619576/611aecf8-328b-4dd2-ae23-320f6a7c6e22)
 
+![7 1](https://github.com/AleksandrNiylek/-Docker.-2-/assets/136619576/d5843754-f60c-4225-8fb4-8a0c51a3dee7)
 
 ---
 
@@ -201,6 +208,9 @@ networks:
 
 1. Убейте все контейнеры и потом удалите их.
 1. Приложите скриншот консоли с проделанными действиями.
+
+#### Скриншот:
+![8](https://github.com/AleksandrNiylek/-Docker.-2-/assets/136619576/b86580e3-9e37-4ab0-bd5b-e14749d23161)
 
 ---
 
