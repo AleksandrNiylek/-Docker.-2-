@@ -194,6 +194,7 @@ networks:
     ipam:
       config:
       - subnet: 172.22.0.0/24
+```
 
 #### Скриншоты:
 ![7](https://github.com/AleksandrNiylek/-Docker.-2-/assets/136619576/611aecf8-328b-4dd2-ae23-320f6a7c6e22)
